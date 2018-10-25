@@ -8,6 +8,13 @@ use KevinYan\Elastic\ElasticManager;
 class ElasticServiceProvider extends ServiceProvider
 {
     /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
      * Bootstrap the application services.
      *
      * @return void
@@ -29,5 +36,15 @@ class ElasticServiceProvider extends ServiceProvider
         $this->app->singleton('elastic', function ($app) {
             return $app->make(ElasticManager::class);
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['elastic'];
     }
 }
