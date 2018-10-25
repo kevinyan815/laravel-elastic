@@ -1,0 +1,22 @@
+{
+    "name": "kevinyan/laravel-elastic",
+    "description": "Elasticsearch fluent interface for Laravel 5",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "~5.0",
+        "elasticsearch/elasticsearch": "~6.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Yan",
+            "email": "kevinyan815@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "KevinYan\\Elastic\\": "src"
+        }
+    }
+}
