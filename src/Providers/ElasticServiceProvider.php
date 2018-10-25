@@ -1,6 +1,6 @@
 <?php
 
-namespace KeivnYan\Elastic\Providers;
+namespace KevinYan\Elastic\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use KevinYan\Elastic\ElasticManager;
