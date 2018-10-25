@@ -5,18 +5,40 @@ use Elasticsearch\ClientBuilder;
 
 class ConnectionFactory
 {
+    /**
+     * Elasticserach client builder
+     *
+     * @var ClientBuilder
+     */
     protected $clientBuilder;
 
+    /**
+     * ConnectionFactory constructor.
+     *
+     * @param ClientBuilder $clientBuilder
+     */
     public function __construct(ClientBuilder $clientBuilder)
     {
         $this->clientBuilder = $clientBuilder;
     }
 
+    /**
+     * Establish a elasticsearch connection based on the configuration
+     *
+     * @param array $config
+     * @return Connection
+     */
     public function make(array $config)
     {
         return $this->createConnection($config);
     }
 
+    /**
+     * Create elasticsearch connection
+     *
+     * @param array $config
+     * @return Connection
+     */
     protected function createConnection(array $config)
     {
         $host = array_only($config, 'host', 'port', 'scheme', 'user', 'pass');

@@ -4,36 +4,42 @@ namespace KevinYan\Elastic;
 class QueryBuilder
 {
     /**
-     * select 字段列表
+     * fields fetched in query
+     *
      * @var array
      */
     protected $selectedFields = [];
     /**
-     * 区间范围条件
+     * range condition
+     *
      * @var array
      */
     protected $range;
 
     /**
-     * term条件
+     * term condition
+     *
      * @var array
      */
     protected $terms;
 
     /**
-     * 排序规则
+     * order rules
+     *
      * @var array
      */
     protected $orders;
 
     /**
-     * 结果集起始文档距搜索结果首个文档的距离
+     * fetched item's offset apart from the first item in the whole result of a search
+     *
      * @var string
      */
     protected $from;
 
     /**
-     * 返回搜素结果文档的数目
+     * result size
+     *
      * @var string
      */
     protected $size;
@@ -102,7 +108,8 @@ class QueryBuilder
 
 
     /**
-     * 为搜索设置时间范围条件
+     * set time range condition for query
+     *
      * @param $start
      * @param $end
      * @return $this
@@ -123,7 +130,7 @@ class QueryBuilder
     }
 
     /**
-     * 为搜索添加term条件
+     * add term condition for query
      * @param $term
      * @param $value
      * @return $this
@@ -135,7 +142,8 @@ class QueryBuilder
     }
 
     /**
-     * 设置搜索结果的排序方式
+     * specify data will be sorted through field in asc or desc
+     *
      * @param $field
      * @param $value
      * @return $this
@@ -147,17 +155,20 @@ class QueryBuilder
     }
 
     /**
-     * 设置搜索按照时间降序返回文档
+     * order documents in descending time
+     *
      * @return $this
      */
-    public function newest()
+    public function latest()
     {
         $this->order('@timestamp', 'desc');
         return $this;
     }
 
     /**
-     * 设置搜索按照时间升序返回文档
+     * order documents in ascending time
+     *
+     * @return $this
      */
     public function oldest()
     {
@@ -166,7 +177,7 @@ class QueryBuilder
     }
 
     /**
-     * 设置搜索结果_source里只包含给定的字段
+     * set fields include in _source in query result
      * @param array $fields
      * @return $this
      */
@@ -178,7 +189,7 @@ class QueryBuilder
     }
 
     /**
-     * 清除selectedFields里的值
+     * clear $selectedFields
      */
     protected function clearSelect()
     {
@@ -186,7 +197,8 @@ class QueryBuilder
     }
 
     /**
-     * 设置返回的第一条文档距离结果集首个文档的距离(文档数)
+     * Set the distance of the first document returned from the first document in the whole query result set
+     *
      * @param $offset
      * @return $this
      */
@@ -197,7 +209,8 @@ class QueryBuilder
     }
 
     /**
-     * 设置要返回的文档数目
+     * set size of return result
+     *
      * @param $size
      * @return $this
      */
@@ -220,14 +233,14 @@ class QueryBuilder
     }
 
     /**
-     * 组成搜索条件的Query
-     * Query示例:
+     * compose query based on all options we set before
+     * Query Example:
      *
      * [
-     *     'index' => 'logstash-bussiness_weixin_bridge_page*',
-     *     'type'  => 'bussiness_weixin_bridge_page',
-     *     'scroll'=> '30s',//scroll镜像生存时间维持30秒, 在调用每次进行scroll搜索时会重新设置镜像的生存时间,
-     *     'size'  => '50',//result size for per shard scroll created
+     *     'index' => 'index name ',
+     *     'type'  => 'type name',
+     *     'scroll'=> '30s',// how long between scroll requests. should be small!
+     *     'size'  => '50', //results size for per shard scroll created
      *     'body'  => [
      *         'query' => [
      *             'bool' => [
@@ -301,7 +314,8 @@ class QueryBuilder
 
 
     /**
-     * 搜索并返回文档
+     * fetch then return documents
+     *
      * @return array
      */
     public function get()
@@ -314,7 +328,8 @@ class QueryBuilder
     }
 
     /**
-     * 返回匹配搜索条件的文档数
+     * count matching documents
+     *
      * @return int
      */
     public function count()
@@ -332,9 +347,11 @@ class QueryBuilder
     }
 
     /**
-     * 遍历搜索结果
-     * 分页遍历搜索结果请不要循环用from和size来取数据, 应该用更高效的scroll api, 更多信息查看下面的文档
+     * iterate documents matching search options
+     * this is more efficient than specify from and size in query body, more about scroll you can checkout
      * @documentaion https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/_search_operations.html#_scrolling
+     *
+     * @return array
      */
     public function scroll()
     {

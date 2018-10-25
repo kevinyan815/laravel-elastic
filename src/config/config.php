@@ -16,9 +16,9 @@ return [
     | Default Elastic Connection Name
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for all database work. Of course
-    | you may use many connections at once using the Database library.
+    | Here you may specify which of the connections below you wish
+    | to use as your default connection for all elasticsearch's work. Of course
+    | you may use many connections at once using the Elastic library.
     |
     */
 
@@ -26,10 +26,9 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ElasticSearch 连接的配置信息
+    | ElasticSearch connection configuration
     |--------------------------------------------------------------------------
-    | index和type是ElasticSearch执行时操作才需要的配置信息, 其它几项配置信息是连接
-    | ElasticSearch时需要的配置信息
+    |
     */
 
     'connections' => [

@@ -5,20 +5,53 @@ use Elasticsearch\Client as EsClient;
 class Connection
 {
     /**
+     * Elasticsearch client instance
+     *
      * @var EsClient
      */
     protected $client;
 
+    /**
+     * Query builder
+     *
+     * @var
+     */
     protected $queryBuilder;
 
+    /**
+     * The elasticsearch connection configuration options.
+     *
+     * @var array
+     */
     protected $config;
 
+    /**
+     * Index name for elasticsearch connection
+     *
+     * @var
+     */
     protected $index;
 
+    /**
+     * type name for elasticsearch connection
+     *
+     * @var
+     */
     protected $type;
 
+    /**
+     * time zone (usually using in range query)
+     *
+     * @var
+     */
     public $timeZone;
 
+    /**
+     * Connection constructor.
+     *
+     * @param EsClient $client
+     * @param $config
+     */
     public function __construct(EsClient $client, $config)
     {
         $this->client = $client;
