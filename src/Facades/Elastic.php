@@ -2,7 +2,7 @@
 
 namespace KevinYan\Elastic\Facades;
 
-use Illminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Facade;
 
 
 class Elastic extends Facade

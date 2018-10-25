@@ -2,13 +2,28 @@
 
 namespace KevinYan\Elastic;
 
+use Illuminate\Support\Arr;
+
 class ElasticManager
 {
-    protected $connectionFactory;
+    /**
+     * the elastic connection factory instance
+     *
+     * @var ConnectionFactory
+     */
+    protected $factory;
+
+    /**
+     * The active connection instances.
+     *
+     * @var array
+     */
+    protected $connections = [];
+
 
     public function __construct(ConnectionFactory $connectionFactory)
     {
-        $this->connectionFactory = $connectionFactory;
+        $this->factory = $connectionFactory;
     }
 
     /**
@@ -21,7 +36,9 @@ class ElasticManager
     {
         $name = $name ?: $this->getDefaultConnection();
 
-        $this->makeConnection($name);
+        if (! isset($this->connections[$name])) {
+            $this->connections[$name] = $this->makeConnection($name);
+        }
 
         return $this->connections[$name];
     }

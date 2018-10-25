@@ -9,11 +9,15 @@ class Connection
      */
     protected $client;
 
+    protected $queryBuilder;
+
     protected $config;
 
     protected $index;
 
     protected $type;
+
+    public $timeZone;
 
     public function __construct(EsClient $client, $config)
     {
@@ -71,13 +75,16 @@ class Connection
     }
 
     /**
-     * Get a new query builder instance.
+     * Get query builder instance.
      *
      * @return QueryBuilder
      */
     public function query()
     {
-        return new QueryBuilder($this);
+        if (! ($this->queryBuilder instanceof QueryBuilder)) {
+            $this->queryBuilder = new QueryBuilder($this);
+        }
+        return $this->queryBuilder;
     }
 
     /**

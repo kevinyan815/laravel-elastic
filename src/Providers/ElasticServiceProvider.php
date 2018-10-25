@@ -27,7 +27,7 @@ class ElasticServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('elastic', function ($app) {
-            $app->make(ElasticManager::class);
+            return $app->make(ElasticManager::class);
         });
     }
 }

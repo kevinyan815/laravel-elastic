@@ -40,9 +40,17 @@ class QueryBuilder
 
     /**
      * _scroll_id
+     *
      * @var string
      */
     protected $scrollId;
+
+    /**
+     * result size for per shard scroll created
+     *
+     * @var int
+     */
+    protected $scrollSize;
 
     /**
      * Elastic connection instance
@@ -107,7 +115,7 @@ class QueryBuilder
                     "gte" => $start,
                     "lte" => $end,
                     "format" => "yyyy-MM-dd HH:mm:ss",
-                    "time_zone" => "+08:00"
+                    "time_zone" => $this->connection->timeZone
                 ]
             ]
         ];
