@@ -131,6 +131,7 @@ class QueryBuilder
 
     /**
      * add term condition for query
+     *
      * @param $term
      * @param $value
      * @return $this
@@ -361,5 +362,19 @@ class QueryBuilder
         ]);
         $this->scrollId = array_get($response, '_scroll_id');
         return array_get($response, 'hits.hits');
+    }
+
+    /**
+     * Dump the raw elastic search result and end the script
+     *
+     * @param void
+     * @return void
+     */
+    public function dump()
+    {
+        $this->composeQuery();
+        $result = $this->connection->client()->search($this->queryBody);
+
+        dd($result);
     }
 }
