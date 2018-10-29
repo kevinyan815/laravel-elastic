@@ -4,7 +4,7 @@ Elasticsearch Fluent interface for Laravel5
 
 Now just have a very rough version impelements elasticsearch's basic search functionality.
 
-### Installation
+## Installation
 
 - get package from packagist
 
@@ -35,7 +35,7 @@ composer requrire kevinyan/laravel-elastic 0.0.1
 php artisan vendor:publish --provider="KevinYan\Elastic\Providers\ElasticServiceProvider"
 ```
 
-### Usage
+## Usage
 
 ```
 // resolve elastic service from IocContainer, this will connect to the default elastic connection
@@ -71,14 +71,14 @@ Sometime you may need to find out what elasticsearch returns for your search act
 $result = $elastic->select(['title', 'author'])->term(['author', 'kevin'])->dump();
 ```
 
-#### Use Facade
+### Use Facade
 
 The package comes with a facade,if you prefer the static method calls over dependency injection.
 
 Replace `app()->make('elastic')` with `Elastic::` in the examples above.
 
-### Contact
+## Contact
 Open an issue on GitHub if you have any problems or suggestions.
 
-### License
+## License
 The contents of this repository is released under the MIT license.
