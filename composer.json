@@ -18,5 +18,13 @@
         "psr-4": {
             "KevinYan\\Elastic\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["KevinYan\\Elastic\\Providers\\ElasticServiceProvider"],
+            "aliases": {
+                "Sentry": "KevinYan\\Elastic\\Facades\\Elastic"
+            }
+        }
     }
 }
