@@ -9,7 +9,7 @@ Now just have a very rough version impelements elasticsearch's basic search func
 - get package from packagist
 
 ```
-composer requrire kevinyan/laravel-elastic 0.0.1
+composer requrire kevinyan/laravel-elastic
 ```
 
 - register service provider and facade in 'app.php'
