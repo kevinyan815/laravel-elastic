@@ -40,7 +40,7 @@ return [
             'pass' => env('ELASTIC_PASS', ''),
             'index' => env('ELASTIC_INDEX', 'default'),//index name can ending with asterisk as a wildcard to match group of index
             'type'  => env('ELASTIC_TYPE', 'default'),
-            'time_zone' => '+8:00',
+            'time_zone' => '+08:00',
         ]
     ]
 ];
