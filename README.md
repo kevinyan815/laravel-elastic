@@ -12,7 +12,7 @@ Now just have a very rough version impelements elasticsearch's basic search func
 composer requrire kevinyan/laravel-elastic
 ```
 
-- register service provider and facade in 'app.php'
+- register service provider and facade in `config/app.php`
 
 ```
 'providers' => [
