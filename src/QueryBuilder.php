@@ -158,22 +158,24 @@ class QueryBuilder
     /**
      * order documents in descending time
      *
+     * @param string $field  Field name
      * @return $this
      */
-    public function latest()
+    public function latest($field = '@timestamp')
     {
-        $this->order('@timestamp', 'desc');
+        $this->order($field, 'desc');
         return $this;
     }
 
     /**
      * order documents in ascending time
      *
+     * @param string $field  Field name
      * @return $this
      */
-    public function oldest()
+    public function oldest($field = '@timestamp')
     {
-        $this->order('@timestamp', 'asc');
+        $this->order($field, 'asc');
         return $this;
     }
 
