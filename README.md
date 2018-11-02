@@ -35,6 +35,13 @@ composer requrire kevinyan/laravel-elastic
 php artisan vendor:publish --provider="KevinYan\Elastic\Providers\ElasticServiceProvider"
 ```
 
+## Configuration
+
+Our configuration file is well documented, but there's one thing to emphasize.
+Since in elasticsearch version 6 type was removed, if your elasticsearch server is higher than 6,
+be sure not to set `type` config option in configuration file.
+  
+
 ## Usage
 
 ```
