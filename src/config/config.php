@@ -38,8 +38,11 @@ return [
             'scheme' => env('ELASTIC_SCHEME', 'http'),
             'user' => env('ELASTIC_USER', ''),
             'pass' => env('ELASTIC_PASS', ''),
-            'index' => env('ELASTIC_INDEX', 'default'),//index name can ending with asterisk as a wildcard to match group of index
-            'type'  => env('ELASTIC_TYPE', 'default'),
+            // index name can ending with asterisk as a wildcard to match group of index
+            'index' => env('ELASTIC_INDEX', 'default'),
+            // since in elasticsearch version 6 type was removed, if your elasticsearch server is higher than 6,
+            // be sure not to set this config item or simply remove this line.
+            'type'  => env('ELASTIC_TYPE', null),
             'time_zone' => '+08:00',
         ]
     ]
