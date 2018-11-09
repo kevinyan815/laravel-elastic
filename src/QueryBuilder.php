@@ -110,15 +110,16 @@ class QueryBuilder
     /**
      * set time range condition for query
      *
-     * @param $start
-     * @param $end
+     * @param string $start
+     * @param string $end
+     * @param string $timeField
      * @return $this
      */
-    public function setTimeRange($start, $end)
+    public function setTimeRange($start, $end, $timeField = "@timestamp")
     {
         $this->range = [
             "range" => [
-                "@timestamp" => [
+                "$timeField" => [
                     "gte" => $start,
                     "lte" => $end,
                     "format" => "yyyy-MM-dd HH:mm:ss",
