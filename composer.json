@@ -23,7 +23,7 @@
         "laravel": {
             "providers": ["KevinYan\\Elastic\\Providers\\ElasticServiceProvider"],
             "aliases": {
-                "Sentry": "KevinYan\\Elastic\\Facades\\Elastic"
+                "Elastic": "KevinYan\\Elastic\\Facades\\Elastic"
             }
         }
     }

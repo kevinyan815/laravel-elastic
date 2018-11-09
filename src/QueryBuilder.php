@@ -59,6 +59,14 @@ class QueryBuilder
     protected $scrollSize;
 
     /**
+     * indicates how long Elasticsearch to keep the search context open for another scroll operation
+     * Unit: second
+     *
+     * @var int
+     */
+    protected $scrollKeepTime;
+
+    /**
      * Elastic connection instance
      *
      * @var Connection
@@ -307,6 +315,9 @@ class QueryBuilder
         if ($this->scrollSize) {
             array_set($this->queryBody, 'size', $this->scrollSize);
         }
+        if ($this->scrollKeepTime) {
+            array_set($this->queryBody, 'scroll',  $this->scrollKeepTime);
+        }
         if ($this->orders) {
             $orders = [];
             foreach($this->orders as $field => $value) {
@@ -379,5 +390,16 @@ class QueryBuilder
         $result = $this->connection->client()->search($this->queryBody);
 
         dd($result);
+    }
+
+    /**
+     * indicates how long Elasticsearch to keep the search context open for another scroll operation
+     * Unit: second
+     *
+     * @param $keepTime
+     */
+    public function setScrollKeepTime($keepTime)
+    {
+        $this->scrollKeepTime = $keepTime;
     }
 }
