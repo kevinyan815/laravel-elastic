@@ -98,8 +98,6 @@ class QueryBuilder
     public function initQueryBody()
     {
         $this->queryBody = [
-            'scroll' => '30s',
-            'size' => 50,
             'index' => $this->connection->index(),
             'type'  => $this->connection->type(),
             'body' => [
@@ -143,11 +141,12 @@ class QueryBuilder
      *
      * @param $term
      * @param $value
+     * @param string $condition condition type: must or should
      * @return $this
      */
-    public function term($term, $value)
+    public function term($term, $value, $condition = 'must')
     {
-        $this->terms[$term] = $value;
+        $this->terms[$condition][$term] = $value;
         return $this;
     }
 
@@ -267,13 +266,10 @@ class QueryBuilder
      *                             ]
      *                        ]
      *                    ],
-     *                    [
-     *                        "term" => ["material_id" => 268]
-     *                    ],
-     *                    [
-     *                        "term" => ["material_type" => 1]
-     *                    ]
      *                ],
+     *                "must" => [
+     *                    "field_name" => "abc"
+     *                ]
      *            ]
      *        ],
      *        'sort' => [
@@ -300,11 +296,15 @@ class QueryBuilder
 
         }
         if ($this->terms) {
-            $filter = array_get($this->queryBody, 'body.query.bool.filter');
-            foreach($this->terms as $key => $value) {
-                array_push($filter, ["term" => [$key => $value]]);
+            foreach($this->terms as $condition => $conditionTerms) {
+                $$condition = array_get($this->queryBody, "body.query.bool.{$condition}");
+                $$condition = $$condition ?: [];
+                foreach ($conditionTerms as $key => $value) {
+                    array_push($$condition, ["term" => [$key => $value]]);
+                }
+                array_set($this->queryBody, "body.query.bool.{$condition}", $$condition);
             }
-            array_set($this->queryBody, 'body.query.bool.filter', $filter);
+
         }
         if ($this->from) {
             array_set($this->queryBody, 'body.from', $this->from);
