@@ -82,7 +82,7 @@ while($result && count($result) > 0) {
 Sometime you may need to find out what elasticsearch returns for your search action. You can simply dump
  using `dump` method, this method will dump all raw returns from elasticsearch to output(browser or standard output) and then end the script :
 ```
-$result = $elastic->select(['title', 'author'])->term(['author', 'kevin'])->dump();
+$result = $elastic->select(['title', 'author'])->term('author', 'kevin')->dump();
 ```
 
 ### Use Facade
