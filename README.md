@@ -50,7 +50,7 @@ $elastic = app()->make('elastic')
 // connection to an specific connection
 $elastic = app()->make('elastic')->connection('connection name');
 
-// we have three different types of  term : must, should and filter, default term type is must.
+// we have three different types of  term : must, should and filter, default type is must.
 // search using a must term
 $elastic->select(['title', 'author', 'published_at'])->term('author', 'kevin')
         ->setTimeRange('2016-01-02 12:00:00', '2016-06-05 16:23:00)->latest()
